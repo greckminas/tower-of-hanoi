@@ -7,7 +7,7 @@ typedef struct{
 	int step;
 }Player;
 
-void ScoreboardMenu();
+int ScoreboardMenu();
 
 void SortData();
 
