@@ -1,10 +1,10 @@
 ﻿  main.cpp
-E:\.POLBAN\COLLEGE\Semester 2\Struktur Data dan Algoritma Praktek - 16TIN2074\TUBES\tower-of-hanoi\tower-of-hanoi\main.cpp(60,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-E:\.POLBAN\COLLEGE\Semester 2\Struktur Data dan Algoritma Praktek - 16TIN2074\TUBES\tower-of-hanoi\tower-of-hanoi\main.cpp(61,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 E:\.POLBAN\COLLEGE\Semester 2\Struktur Data dan Algoritma Praktek - 16TIN2074\TUBES\tower-of-hanoi\tower-of-hanoi\main.cpp(62,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\.POLBAN\COLLEGE\Semester 2\Struktur Data dan Algoritma Praktek - 16TIN2074\TUBES\tower-of-hanoi\tower-of-hanoi\main.cpp(63,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\.POLBAN\COLLEGE\Semester 2\Struktur Data dan Algoritma Praktek - 16TIN2074\TUBES\tower-of-hanoi\tower-of-hanoi\main.cpp(64,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   Generating code
-  12 of 31 functions (38.7%) were compiled, the rest were copied from previous compilation.
+  1 of 33 functions ( 3.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    2 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   tower-of-hanoi.vcxproj -> E:\.POLBAN\COLLEGE\Semester 2\Struktur Data dan Algoritma Praktek - 16TIN2074\TUBES\tower-of-hanoi\Release\tower-of-hanoi.exe

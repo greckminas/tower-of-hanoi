@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 Game::Game(char* username, int difficulty){
 	this->username = (char*)malloc(strlen(username));
 	strcpy(this->username, username);
@@ -125,3 +126,4 @@ bool Game::move(int from, int to){
 
 	return false;
 }
+
