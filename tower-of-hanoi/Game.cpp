@@ -56,7 +56,22 @@ void Game::print(){
 	max_height = (height[1] > max_height) ? height[1] : max_height;
 	max_height = (height[2] > max_height) ? height[2] : max_height;
 
+	printf("\xC9"); // /
+	for(int i = 0; i < 9+this->difficulty*6; i++)
+		printf("\xCD"); // -
+	printf("\xBB\n"); // \ 
+
+	printf("%c %-9s : %*s %c\n", '\xBA', "Username", 5-getDifficulty()*6, getUsername(), '\xBA');
+	printf("%c %-9s : %*d %c\n", '\xBA', "Diff.", 5-getDifficulty()*6, getDifficulty(), '\xBA');
+	printf("%c %-9s : %*d %c\n", '\xBA', "Step", 5-getDifficulty()*6, getStep(), '\xBA');
+
+	printf("\xCC"); // /
+	for(int i = 0; i < 9+this->difficulty*6; i++)
+		printf("\xCD"); // -
+	printf("\xB9\n"); // \ 
+
 	for(int i = 0; i < this->difficulty; i++){
+		printf("\xBA"); // |
 		for(int j = 0; j < 3; j++)
 			if(i < this->difficulty-height[j])
 				printf(" %*s|%*s ", this->difficulty, "", this->difficulty, "");
@@ -67,8 +82,13 @@ void Game::print(){
 				printf(" %*s%.*s\xDB%.*s%*s ", empty, "", fill, str_fill, fill, str_fill, empty, "");
 			}
 
-		printf("\n");
+		printf("\xBA\n");
 	}
+	printf("\xC8"); // \ 
+	for(int i = 0; i < 9+this->difficulty*6; i++)
+		printf("\xCD"); // -
+	printf("\xBC\n"); // /
+
 }
 
 bool Game::isFinished(){
