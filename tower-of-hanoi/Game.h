@@ -3,6 +3,7 @@
 #include <time.h>
 #include "Stack.h"
 
+
 class Game {
 	char* username;
 	int difficulty;
@@ -24,7 +25,6 @@ public:
 	void print();
 	bool isFinished();
 	int getStep();
-
 	bool move(int from, int to);
 };
 
