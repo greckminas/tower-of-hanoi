@@ -11,6 +11,8 @@ void ScoreboardMenu();
 
 void SortData();
 
-void ShowScoreboard(char *difficulty);
+void ShowScoreboard(int difficulty);
 
-void SaveData(Player newdata);
+void SaveData(Player newdata, int difficulty);
+
+#endif
