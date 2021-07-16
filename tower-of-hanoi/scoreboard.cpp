@@ -77,7 +77,12 @@ void ShowScoreboard(int difficulty){
 	fclose(data);
 }
 
-void SaveData(Player newdata, int difficulty){
+void SaveData(Game data){
+	Player newdata;
+	newdata.name = malloc(sizeof(strlen(data.getUsername())));
+	strcpy(newdata.name, data.getUsername());
+	newdata.step = data.getStep();
+	newdata.time = 0;
 	Player record[20];
 	for(int i = 0;i<20;i++){
 		strcpy(record[i].name,"");

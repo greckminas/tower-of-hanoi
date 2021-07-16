@@ -3,6 +3,7 @@
 #include <conio.h>
 #include "Menu.h"
 #include "Game.h"
+#include "scoreboard.h"
 
 void howToPlay();
 
@@ -107,6 +108,7 @@ void PlayGame(char* username, int difficulty){
 		}
 	}
 	printf("\n%d", myGame.getStep());
+	SaveData(myGame);
 	system("pause");
 }
 
@@ -138,7 +140,8 @@ int main(){
 				howToPlay();
 				break;
 			case 3:
-				//scoreboard;
+				ScoreboardMenu();
+				ShowScoreboard(1);
 				break;
 			case 4:
 				exit(0);
