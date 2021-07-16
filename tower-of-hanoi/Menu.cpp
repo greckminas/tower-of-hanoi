@@ -8,7 +8,7 @@ Menu::Menu(int count, char** list){
 	n = count;
 	string = (char**)malloc(4*count);
 	for(int i = 0; i < n; i++){
-		string[i] = (char*)malloc(strlen(list[i]));
+		string[i] = (char*)malloc(strlen(list[i])+1);
 		strcpy(string[i], list[i]);
 	}
 	choose = 1;
@@ -20,7 +20,7 @@ Menu::Menu(int count, char** list, int max_choice){
 	n = count;
 	string = (char**)malloc(4*count);
 	for(int i = 0; i < n; i++){
-		string[i] = (char*)malloc(strlen(list[i]));
+		string[i] = (char*)malloc(strlen(list[i])+1);
 		strcpy(string[i], list[i]);
 	}
 	choose = 1;
@@ -30,6 +30,14 @@ Menu::Menu(int count, char** list, int max_choice){
 		selected[i] = 0;
 
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+}
+
+Menu::~Menu(){
+	
+	for(int i = 0; i < n; i++){
+		free(string[i]);
+	}
+	free(string);
 }
 
 bool Menu::down(){

@@ -3,7 +3,7 @@
 #include "Game.h"
 
 typedef struct{
-	char *name;
+	char name[20];
 	int time;
 	int step;
 }Player;
@@ -14,6 +14,6 @@ void SortData();
 
 void ShowScoreboard(int difficulty);
 
-void SaveData(Game data);
+void SaveData(Game& data);
 
 #endif

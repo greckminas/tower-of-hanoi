@@ -49,7 +49,7 @@ bool surrenderPrompt(){
 
 void PlayGame(char* username, int difficulty){
 
-	Game myGame(username,difficulty);
+	Game myGame(username, difficulty);
 	
 	char* tower_name[3];
 	tower_name[0] = (char*)malloc(40);
@@ -107,9 +107,50 @@ void PlayGame(char* username, int difficulty){
 				break;
 		}
 	}
-	printf("\n%d", myGame.getStep());
 	SaveData(myGame);
 	system("pause");
+}
+
+void CreateGame(char* username, int* difficulty){
+	char* level_list[] = {"[] Boring (3)\n", "[] Walk in the park (4)\n", "[] Normal (5)\n", "[] Nightmare (6)\n", "[] Just Surrender Already (7)\n", "[] Literally Unplayable (8)\n"};
+	Menu difficultyMenu(6, level_list);
+	char tempName[255] = "";
+	while(true){
+		
+		system("cls");
+		printf("Tower of Hanoi -> Play Game\n");
+		printf("Username = ");
+
+		//minimal 4 dan maksimal 12
+		if(strlen(tempName) > 12 || strlen(tempName) < 4){
+			scanf("%[^\n]%*c", tempName);
+			fflush(stdin);
+			continue;
+		} else {
+			printf("%s\n",tempName);
+		}
+
+		
+		printf("Difficulty = \n");
+		difficultyMenu.print();
+		int key = _getch();
+		if (key == 224) {
+			switch (_getch()) { // arrow key value
+			case 72: //up
+				difficultyMenu.up();
+				break;
+			case 80: //down
+				difficultyMenu.down();
+				break;
+			}
+		}
+		else if (key == 13) {
+			strcpy(username, tempName);
+			*difficulty = difficultyMenu.get()+2;
+			break;
+		}
+	}
+	return;
 }
 
 int main(){
@@ -118,11 +159,11 @@ int main(){
 	
 	while (true) {
 		system("cls");
-		printf("Menu\n");
+		printf("Tower of Hanoi\n");
 		MainMenu.print();
 		int key = _getch();
 		if (key == 224) {
-			switch (_getch()) { // the real value
+			switch (_getch()) { // arrow key value
 			case 72: //up
 				MainMenu.up();
 				break;
@@ -134,7 +175,12 @@ int main(){
 		else if (key == 13) { //if enter key pressed
 			switch (MainMenu.get()) {
 			case 1:
-				PlayGame("myUsername",3);
+			{
+				char name[15] = {};
+				int diff = 3;
+				CreateGame(name, &diff);
+				PlayGame(name, diff);
+			}
 				break;
 			case 2:
 				howToPlay();
@@ -164,7 +210,7 @@ void howToPlay() {
 		HTPMenu.print();
 		int ch = _getch();
 		if (ch == 224) {
-			switch (_getch()) { // the real value
+			switch (_getch()) { // arrow key value
 			case 72: //up
 				HTPMenu.up();
 				break;
