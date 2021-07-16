@@ -1,10 +1,10 @@
-.vs/
-ipch/
-Release/
+.vs/*
+ipch/*
+Release/*
 *.sdf
 *.sln
 *.suo
-tower-of-hanoi/Release/
+tower-of-hanoi/Release/*
 tower-of-hanoi/*.vcxproj
 tower-of-hanoi/*.filters
 tower-of-hanoi/*.user
