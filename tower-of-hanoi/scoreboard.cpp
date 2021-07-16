@@ -3,12 +3,43 @@
 #include <string.h>
 #include <stdlib.h>
 
-int ScoreboardMenu(){
+void ScoreboardMenu(){
 	
 }
 
-void SortData(){
-	
+void SortData(int difficulty){
+	Player record[20];
+	Player temp;
+	FILE *data;
+	switch(difficulty){
+		case 1:
+			data = fopen("boring.dat","rb+");
+			break;
+		case 2:
+			data = fopen("walk_in_the_park.dat","rb+");
+			break;
+		case 3:
+			data = fopen("normal.dat","rb+");
+			break;
+		case 4:
+			data = fopen("nightmare.dat","rb+");
+			break;
+		case 5:
+			data = fopen("literally_unplayable.dat","rb+");
+			break;
+	}
+	fread(record, sizeof(Player), 20, data);
+	for(int i = 0; i < 19 ; i++){
+		for(int j = i;j < 20;j++){
+			if(record[i].step > record[j].step){
+				temp = record[i];
+				record[i] = record[j];
+				record[j] = temp;
+			}
+		}
+	}
+	fwrite(record, sizeof(Player), 20, data);
+	fclose(data);
 }
 
 void ShowScoreboard(int difficulty){
