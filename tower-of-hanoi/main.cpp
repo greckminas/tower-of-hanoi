@@ -141,7 +141,6 @@ int main(){
 				break;
 			case 3:
 				ScoreboardMenu();
-				ShowScoreboard(1);
 				break;
 			case 4:
 				exit(0);
