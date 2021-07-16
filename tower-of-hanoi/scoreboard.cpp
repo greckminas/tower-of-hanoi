@@ -43,23 +43,26 @@ void SortData(int difficulty){
 	FILE *data;
 	switch(difficulty){
 		case 1:
-			data = fopen("boring.dat","rb+");
+			data = fopen("boring.dat","rb");
 			break;
 		case 2:
-			data = fopen("walk_in_the_park.dat","rb+");
+			data = fopen("walk_in_the_park.dat","rb");
 			break;
 		case 3:
-			data = fopen("normal.dat","rb+");
+			data = fopen("normal.dat","rb");
 			break;
 		case 4:
-			data = fopen("nightmare.dat","rb+");
+			data = fopen("nightmare.dat","rb");
 			break;
 		case 5:
-			data = fopen("just_surrender_already.dat","rb+");
+			data = fopen("just_surrender_already.dat","rb");
 			break;
 		case 6:
-			data = fopen("literally_unplayable.dat","rb+");
+			data = fopen("literally_unplayable.dat","rb");
 			break;
+	}
+	if (data == NULL) {
+		return;
 	}
 	fread(record, sizeof(Player), 20, data);
 	for(int i = 0; i < 19 ; i++){
@@ -70,6 +73,27 @@ void SortData(int difficulty){
 				record[j] = temp;
 			}
 		}
+	}
+	fclose(data);
+	switch (difficulty) {
+	case 1:
+		data = fopen("boring.dat", "wb");
+		break;
+	case 2:
+		data = fopen("walk_in_the_park.dat", "wb");
+		break;
+	case 3:
+		data = fopen("normal.dat", "wb");
+		break;
+	case 4:
+		data = fopen("nightmare.dat", "wb");
+		break;
+	case 5:
+		data = fopen("just_surrender_already.dat", "wb");
+		break;
+	case 6:
+		data = fopen("literally_unplayable.dat", "wb");
+		break;
 	}
 	fwrite(record, sizeof(Player), 20, data);
 	fclose(data);
@@ -127,40 +151,53 @@ void SaveData(Game& prevgame){
 	FILE *data = NULL;
 	switch(prevgame.getDifficulty()-2){
 		case 1:
-			data = fopen("boring.dat","wb+");
+			data = fopen("boring.dat","rb");
 			break;
 		case 2:
-			data = fopen("walk_in_the_park.dat","wb+");
+			data = fopen("walk_in_the_park.dat","rb");
 			break;
 		case 3:
-			data = fopen("normal.dat","wb+");
+			data = fopen("normal.dat","rb");
 			break;
 		case 4:
-			data = fopen("nightmare.dat","wb+");
+			data = fopen("nightmare.dat","rb");
 			break;
 		case 5:
-			data = fopen("just_surrender_already.dat","wb+");
+			data = fopen("just_surrender_already.dat","rb");
 			break;
 		case 6:
-			data = fopen("literally_unplayable.dat","wb+");
+			data = fopen("literally_unplayable.dat","rb");
 			break;
 	}
-	//printf("%x\n", data);
 	if(data != NULL){
-		rewind(data);
 		fread(record, sizeof(Player), 20, data);
-		for(int j = 0; j<20; j++){
-			printf("%d = %d = %d\n", j, record[j].name[0], record[j].step);
-		}
 		int i = 0;
 		
 		while(record[i].name[0] != 0 && i < 19){
-			printf("a= %d ",record[i].name[0]);
 			if(stricmp(record[i].name, newdata.name) == 0){
-				printf("b");
 				if(newdata.step < record[i].step){
-					printf("c");
 					record[i] = newdata;
+					fclose(data);
+					switch (prevgame.getDifficulty() - 2) {
+					case 1:
+						data = fopen("boring.dat", "wb");
+						break;
+					case 2:
+						data = fopen("walk_in_the_park.dat", "wb");
+						break;
+					case 3:
+						data = fopen("normal.dat", "wb");
+						break;
+					case 4:
+						data = fopen("nightmare.dat", "wb");
+						break;
+					case 5:
+						data = fopen("just_surrender_already.dat", "wb");
+						break;
+					case 6:
+						data = fopen("literally_unplayable.dat", "wb");
+						break;
+					}
 					fwrite(record, sizeof(Player), 20, data);
 					fclose(data);
 				}
@@ -168,15 +205,54 @@ void SaveData(Game& prevgame){
 			}
 			i++;
 		}
-		printf("\n");
-		rewind(data);
 		record[i] = newdata;
+		fclose(data);
+		switch (prevgame.getDifficulty() - 2) {
+		case 1:
+			data = fopen("boring.dat", "wb");
+			break;
+		case 2:
+			data = fopen("walk_in_the_park.dat", "wb");
+			break;
+		case 3:
+			data = fopen("normal.dat", "wb");
+			break;
+		case 4:
+			data = fopen("nightmare.dat", "wb");
+			break;
+		case 5:
+			data = fopen("just_surrender_already.dat", "wb");
+			break;
+		case 6:
+			data = fopen("literally_unplayable.dat", "wb");
+			break;
+		}
 		fwrite(record, sizeof(Player), 20, data);
 		fclose(data);
 		return;
 	}
-	
 	record[0] = newdata;
+	fclose(data);
+	switch (prevgame.getDifficulty() - 2) {
+	case 1:
+		data = fopen("boring.dat", "wb");
+		break;
+	case 2:
+		data = fopen("walk_in_the_park.dat", "wb");
+		break;
+	case 3:
+		data = fopen("normal.dat", "wb");
+		break;
+	case 4:
+		data = fopen("nightmare.dat", "wb");
+		break;
+	case 5:
+		data = fopen("just_surrender_already.dat", "wb");
+		break;
+	case 6:
+		data = fopen("literally_unplayable.dat", "wb");
+		break;
+	}
 	fwrite(record, sizeof(Player), 20, data);
 	fclose(data);
 }

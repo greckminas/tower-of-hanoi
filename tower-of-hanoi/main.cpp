@@ -108,6 +108,7 @@ void PlayGame(char* username, int difficulty){
 		}
 	}
 	SaveData(myGame);
+	SortData();
 	system("pause");
 }
 
