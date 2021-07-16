@@ -25,6 +25,9 @@ void SortData(int difficulty){
 			data = fopen("nightmare.dat","rb+");
 			break;
 		case 5:
+			data = fopen("just_surrender_already.dat","rb+");
+			break;
+		case 6:
 			data = fopen("literally_unplayable.dat","rb+");
 			break;
 	}
@@ -60,6 +63,9 @@ void ShowScoreboard(int difficulty){
 			data = fopen("nightmare.dat","rb");
 			break;
 		case 5:
+			data = fopen("just_surrender_already.dat","rb");
+			break;
+		case 6:
 			data = fopen("literally_unplayable.dat","rb");
 			break;
 	}
@@ -93,6 +99,9 @@ void SaveData(Player newdata, int difficulty){
 			data = fopen("nightmare.dat","rb+");
 			break;
 		case 5:
+			data = fopen("just_surrender_already.dat","rb+");
+			break;
+		case 6:
 			data = fopen("literally_unplayable.dat","rb+");
 			break;
 	}
