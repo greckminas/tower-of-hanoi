@@ -2,9 +2,31 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "Menu.h"
 
 void ScoreboardMenu(){
-	
+	char* difficulty[] = { ">> Boring\n", ">> Walk In The Park\n", ">> Normal\n", ">> Nightmare\n", ">> Just Surrender Already\n", ">> Literally Unplayable\n" };
+	Menu scoreboard(6, difficulty);
+
+	while (true) {
+		system("cls");
+		printf("Select Difficulty:\n");
+		scoreboard.print();
+		int key = _getch();
+		if (key == 224) {
+			switch (_getch()) { // the real value
+			case 72: //up
+				scoreboard.up();
+				break;
+			case 80: //down
+				scoreboard.down();
+				break;
+			}
+		}
+		else if (key == 13) { //if enter key pressed
+			ShowScoreboard(scoreboard.get());
+		}
+	}
 }
 
 void SortData(int difficulty){
@@ -75,11 +97,12 @@ void ShowScoreboard(int difficulty){
 		return;
 	}
 	fread(record, sizeof(Player), 20, data);
-	printf("| %25s | %5s | %4s |", "Name", "Steps", "Time");
+	printf("| %25s | %5s | %4s |\n", "Name", "Steps", "Time");
 	for(int i = 0;i < 20;i++){
-		printf("| %25s |  %03d  | %04s |", record[i].name,record[i].step,record[i].time);
+		printf("| %25s |  %03d  | %04s |\n", record[i].name,record[i].step,record[i].time);
 	}
 	fclose(data);
+	system("pause");
 }
 
 void SaveData(Game prevgame){
@@ -95,7 +118,7 @@ void SaveData(Game prevgame){
 		record[i].time = 0;
 	}
 	FILE *data;
-	switch(prevgame.getDifficulty()){
+	switch(prevgame.getDifficulty()-2){
 		case 1:
 			data = fopen("boring.dat","rb+");
 			break;
