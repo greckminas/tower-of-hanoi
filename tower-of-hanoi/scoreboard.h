@@ -1,5 +1,6 @@
 #ifndef SCOREBOARD_H
 #define SCOREBOARD_H
+#include "Game.h"
 
 typedef struct{
 	char *name;
@@ -7,12 +8,12 @@ typedef struct{
 	int step;
 }Player;
 
-int ScoreboardMenu();
+void ScoreboardMenu();
 
 void SortData();
 
 void ShowScoreboard(int difficulty);
 
-void SaveData(Player newdata, int difficulty);
+void SaveData(Game data);
 
 #endif
