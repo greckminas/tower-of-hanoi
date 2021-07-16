@@ -97,11 +97,12 @@ void ShowScoreboard(int difficulty){
 		return;
 	}
 	fread(record, sizeof(Player), 20, data);
-	printf("| %25s | %5s | %4s |", "Name", "Steps", "Time");
+	printf("| %25s | %5s | %4s |\n", "Name", "Steps", "Time");
 	for(int i = 0;i < 20;i++){
-		printf("| %25s |  %03d  | %04s |", record[i].name,record[i].step,record[i].time);
+		printf("| %25s |  %03d  | %04s |\n", record[i].name,record[i].step,record[i].time);
 	}
 	fclose(data);
+	system("pause");
 }
 
 void SaveData(Game prevgame){
