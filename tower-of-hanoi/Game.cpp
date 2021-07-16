@@ -5,7 +5,7 @@
 
 
 Game::Game(char* username, int difficulty){
-	this->username = (char*)malloc(strlen(username));
+	this->username = (char*)malloc(strlen(username)+1);
 	strcpy(this->username, username);
 	
 	this->difficulty = difficulty;
@@ -16,9 +16,13 @@ Game::Game(char* username, int difficulty){
 	this->tower[0] = Stack();
 	this->tower[1] = Stack();
 	this->tower[2] = Stack();
-
+	
 	for(int i = 0; i < this->difficulty; i++)
 		this->tower[0].push(difficulty-i);
+}
+
+Game::~Game(){
+	free(this->username);
 }
 
 bool Game::setUsername(char* username){
@@ -147,3 +151,10 @@ bool Game::move(int from, int to){
 	return false;
 }
 
+time_t Game::getStartTime(){
+	return this->start_time;
+}
+
+time_t Game::getFinishTime(){
+	return this->finish_time;
+}

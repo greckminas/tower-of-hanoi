@@ -13,6 +13,7 @@ class Menu {
 public:
 	Menu(int count, char** list);
 	Menu(int count, char** list, int max_choice);
+	~Menu();
 	bool down();
 	bool up();
 	bool select();

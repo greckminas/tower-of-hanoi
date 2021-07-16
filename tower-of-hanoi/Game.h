@@ -17,7 +17,7 @@ class Game {
 
 public:
 	Game(char* username, int difficulty);
-
+	~Game();
 	bool setUsername(char* username);
 	char* getUsername();
 	bool setDifficulty(int difficulty);
@@ -26,6 +26,8 @@ public:
 	bool isFinished();
 	int getStep();
 	bool move(int from, int to);
+	time_t getStartTime();
+	time_t getFinishTime();
 };
 
 #endif
