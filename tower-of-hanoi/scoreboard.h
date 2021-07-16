@@ -2,18 +2,17 @@
 #define SCOREBOARD_H
 #include "Game.h"
 
-typedef struct{
-	char name[20];
-	int time;
-	int step;
-}Player;
+class Scoreboard {
+	typedef struct{
+		char name[20];
+		int time;
+		int step;
+	} Player;
 
-void ScoreboardMenu();
-
-void SortData();
-
-void ShowScoreboard(int difficulty);
-
-void SaveData(Game& data);
+public:
+	static void print(int difficulty);
+	static void sort(int difficulty);
+	static void save(Game& data);
+};
 
 #endif

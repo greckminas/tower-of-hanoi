@@ -17,6 +17,18 @@ bool Stack::push(int value){
 	return true;
 }
 
+bool Stack::push(int value, int step){
+	node* newnode = (node*)malloc(sizeof(node));
+	if(newnode == NULL)
+		return false;
+
+	newnode->value = value;
+	newnode->step = step;
+	newnode->prev = top;
+	top = newnode;
+	return true;
+}
+
 int Stack::pop(){
 	int result = -1;
 
@@ -49,6 +61,27 @@ int Stack::peek(int n){
 		return result;
 
 	result = current->value;
+	return result;
+}
+
+int Stack::peek(int n, int* step){
+	//0 = top
+	int result = -1;
+	
+	if(top == NULL)
+		return result;
+
+	node* current = top;
+	for(int i = 0; i < n; i++){
+		if(current == NULL)
+			return result;
+		current = current->prev;
+	}
+	if(current == NULL)
+		return result;
+
+	result = current->value;
+	*step = current->step;
 	return result;
 }
 
