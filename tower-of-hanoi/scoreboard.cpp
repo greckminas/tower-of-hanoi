@@ -232,7 +232,6 @@ void SaveData(Game& prevgame){
 		return;
 	}
 	record[0] = newdata;
-	fclose(data);
 	switch (prevgame.getDifficulty() - 2) {
 	case 1:
 		data = fopen("boring.dat", "wb");
