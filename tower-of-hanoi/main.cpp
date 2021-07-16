@@ -135,7 +135,7 @@ int main(){
 				PlayGame("myUsername",3);
 				break;
 			case 2:
-				//how to play
+				howToPlay();
 				break;
 			case 3:
 				//scoreboard;
@@ -152,13 +152,13 @@ int main(){
 
 void howToPlay() {
 
-	char* language[] = { "\n>>English\n", ">>Bahasa Indonesia\n", ">>Back to Main Menu\n" };
+	char* language[] = { ">> English\n", ">> Bahasa Indonesia\n", ">> Back to Main Menu\n" };
 	Menu HTPMenu(3, language);
 
 	while (1) {
 		system("cls");
 		
-		printf("What language do you want to read?");
+		printf("What language do you want to read?\n");
 		HTPMenu.print();
 		int ch = _getch();
 		if (ch == 224) {
