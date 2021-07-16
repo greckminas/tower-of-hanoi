@@ -107,7 +107,6 @@ void PlayGame(char* username, int difficulty){
 				break;
 		}
 	}
-	printf("\n%d", myGame.getStep());
 	SaveData(myGame);
 	system("pause");
 }

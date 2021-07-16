@@ -5,7 +5,7 @@
 
 
 Game::Game(char* username, int difficulty){
-	this->username = (char*)malloc(strlen(username)+1);
+	this->username = (char*) malloc(strlen(username)+1);
 	strcpy(this->username, username);
 	
 	this->difficulty = difficulty;
