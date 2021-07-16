@@ -69,6 +69,11 @@ void ShowScoreboard(int difficulty){
 			data = fopen("literally_unplayable.dat","rb");
 			break;
 	}
+	if (data == NULL) {
+		printf("No Record Found!!!\n");
+		system("pause");
+		return;
+	}
 	fread(record, sizeof(Player), 20, data);
 	printf("| %25s | %5s | %4s |", "Name", "Steps", "Time");
 	for(int i = 0;i < 20;i++){
@@ -77,11 +82,11 @@ void ShowScoreboard(int difficulty){
 	fclose(data);
 }
 
-void SaveData(Game data){
+void SaveData(Game prevgame){
 	Player newdata;
-	newdata.name = malloc(sizeof(strlen(data.getUsername())));
-	strcpy(newdata.name, data.getUsername());
-	newdata.step = data.getStep();
+	newdata.name = (char*)malloc(sizeof(strlen(prevgame.getUsername())));
+	strcpy(newdata.name, prevgame.getUsername());
+	newdata.step = prevgame.getStep();
 	newdata.time = 0;
 	Player record[20];
 	for(int i = 0;i<20;i++){
@@ -90,7 +95,7 @@ void SaveData(Game data){
 		record[i].time = 0;
 	}
 	FILE *data;
-	switch(difficulty){
+	switch(prevgame.getDifficulty()){
 		case 1:
 			data = fopen("boring.dat","rb+");
 			break;
