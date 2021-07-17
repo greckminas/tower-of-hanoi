@@ -125,6 +125,181 @@ void PlayGame(char* username, int difficulty, bool is_blank = false){
 	_getch();
 }
 
+void PlayGame_ImAlive(char* username, int difficulty){
+
+	Game myGame(username, difficulty);
+	char* tower_name[3];
+	char message[255] = "";
+	bool isSurrender = false;
+	bool is_blank = false;
+	int last_from = 0;
+	int last_to = 0;
+	int move_type = 0;
+
+	tower_name[0] = (char*)malloc(40);
+	tower_name[1] = (char*)malloc(40);
+	tower_name[2] = (char*)malloc(40);
+	sprintf(tower_name[0], " %*sTower 1%*s", myGame.getDifficulty() - 2, "", myGame.getDifficulty() - 2, "");
+	sprintf(tower_name[1], "%*sTower 2%*s", myGame.getDifficulty() - 2, "", myGame.getDifficulty() - 2, "");
+	sprintf(tower_name[2], "%*sTower 3%*s", myGame.getDifficulty() - 2, "", myGame.getDifficulty() - 2, "");
+	Menu towerMenu(3, tower_name, 2);
+	free(tower_name[0]);
+	free(tower_name[1]);
+	free(tower_name[2]);
+
+	while(true){
+		system("cls");
+		if(is_blank)
+			myGame.print_blank();
+		else
+			myGame.print();
+		towerMenu.print();
+		if(myGame.isFinished())
+			break;
+
+		printf("\n ");
+		int* selected_tower = towerMenu.get_all();
+		for (int i = 1; i < 4; i++) {
+			if (i == selected_tower[0])
+				printf(" %*sF%*s ", myGame.getDifficulty(), "", myGame.getDifficulty(), "");
+			else if(i == selected_tower[1])
+				printf(" %*sT%*s ", myGame.getDifficulty(), "", myGame.getDifficulty(), "");
+			else
+				printf(" %*s %*s ", myGame.getDifficulty(), "", myGame.getDifficulty(), "");
+		}
+		if(message[0] != '\0')
+			printf("\n%s\n",message);
+
+		int key = _getch();
+		if (key == 224) {
+			switch(_getch()) { // the real value
+				case 75: //left
+					towerMenu.up();
+					break;
+				case 77: //right
+					towerMenu.down();
+					break;
+			}
+		} 
+		else if (key == 13){ //if enter key pressed
+			int randomNumber = (rand() % 5) + 1;
+			while(move_type == 3 && move_type == randomNumber){
+				randomNumber = (rand() % 5) + 1;
+			}
+			move_type = randomNumber;
+			switch(move_type){
+			case 1:
+			{
+				//move ke tower yang ga dipilih
+				if(myGame.move(selected_tower[0], 6-(selected_tower[0]+selected_tower[1]))){
+					is_blank = false;
+					last_from = selected_tower[0];
+					last_to = 6-(selected_tower[0]+selected_tower[1]);
+					towerMenu.reset();
+					strcpy(message, "nah, nevermind i'm going this way~ :>\n");
+				} else if(myGame.move(selected_tower[0], selected_tower[1])){
+					is_blank = false;
+					last_from = selected_tower[0];
+					last_to = selected_tower[1];
+					towerMenu.reset();
+					strcpy(message, "you're lucky this time, i can't move to other tower. >:(\n");
+				}
+				break;
+			}
+			case 2:
+				//undo move
+				if(myGame.move(last_to, last_from)){
+					is_blank = false;
+					last_from = last_to;
+					last_to = last_from;
+					towerMenu.reset();
+					strcpy(message, "i don't want to move, actually let's go back!\n");
+				}
+				break;
+			case 3:
+				//sleep terus move
+				printf("\nZzz");
+				Sleep(800);
+				printf(".");
+				Sleep(800);
+				printf(".");
+				Sleep(800);
+				printf(".");
+				Sleep(800);
+				printf(" o.o");
+				Sleep(400);
+				printf("\b\b\bO.o");
+				Sleep(400);
+				printf("\b\b\bo.0");
+				Sleep(600);
+				printf("\b\b\b0.o");
+				Sleep(800);
+				printf("\b\b\b\b, ha?");
+				Sleep(1500);
+				printf(" you want me to move?\n");
+				Sleep(1700);
+				printf("come on, i'm still sleepy\n");
+				Sleep(2700);
+				printf("are you still waiting for me?\n");
+				Sleep(2300);
+				printf("ok fine, i'm moving >:(\n");
+				Sleep(1700);
+				if(myGame.move(selected_tower[0], selected_tower[1])){
+					is_blank = false;
+					last_from = selected_tower[0];
+					last_to = selected_tower[1];
+					towerMenu.reset();
+					strcpy(message, "satisfied, huh?\n");
+				}
+				break;
+			case 4:
+				//blind
+				if(myGame.move(selected_tower[0], selected_tower[1])){
+					is_blank = true;
+					last_from = selected_tower[0];
+					last_to = selected_tower[1];
+					towerMenu.reset();
+					strcpy(message, "HEHEHEHE, CAN'T SEE ME NOW!\n");
+				}
+				break;
+			case 5:
+				//normal
+				if(myGame.move(selected_tower[0], selected_tower[1])){
+					is_blank = false;
+					last_from = selected_tower[0];
+					last_to = selected_tower[1];
+					towerMenu.reset();
+					message[0] = '\0';
+				}
+				break;
+
+
+			}
+			if(myGame.move(selected_tower[0], selected_tower[1]))
+				towerMenu.reset();
+		}
+		else if (key == 32){ //if space key pressed
+			towerMenu.select();
+		}
+		else if (key == 27){ //if escape key pressed
+			if(surrenderPrompt()){
+				isSurrender = true;
+				system("cls");
+				myGame.print();
+				printf("You surrendered the game!");
+				break;
+			}
+				
+		}
+	}
+	if (!isSurrender){
+		Scoreboard::save(myGame);
+		Scoreboard::sort(myGame.getDifficulty());
+	}
+	printf("\nGame ended!\nPress any key to continue!\n");
+	_getch();
+}
+
 void CreateGame(char* username, int* difficulty){
 	char* level_list[] = {"[] Boring (3)\n", "[] Walk in the park (4)\n", "[] Normal (5)\n", "[] Nightmare (6)\n", "[] Just Surrender Already (7)\n", "[] Literally Unplayable (8)\n"};
 	Menu difficultyMenu(6, level_list);
@@ -346,16 +521,18 @@ int main(){
 				bool blank = false;
 				int mode = GameModeMenu();
 				switch(mode){
-				case 1:
-					break;
 				case 2:
 					blank = true;
+				case 1:
+					CreateGame(name, &diff);
+					PlayGame(name, diff, blank);
 					break;
 				case 3:
+					CreateGame(name, &diff);
+					PlayGame_ImAlive(name, diff);
 					break;
 				}
-				CreateGame(name, &diff);
-				PlayGame(name, diff, blank);
+				
 			}
 				break;
 			case 2:
