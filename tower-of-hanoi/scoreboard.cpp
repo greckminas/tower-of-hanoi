@@ -131,7 +131,7 @@ void ShowScoreboard(int difficulty){
 	fread(record, sizeof(Player), 20, data);
 	printf("| %25s | %5s | %4s |\n", "Name", "Steps", "Time");
 	for(int i = 0;i < 20;i++){
-		printf("| %25s |  %03d  | %04s |\n", record[i].name,record[i].step,record[i].time);
+		printf("| %25s |  %03d  | %04d |\n", record[i].name,record[i].step,record[i].time);
 	}
 	fclose(data);
 	system("pause");
@@ -172,9 +172,8 @@ void SaveData(Game& prevgame){
 	if(data != NULL){
 		fread(record, sizeof(Player), 20, data);
 		int i = 0;
-		
-		while(record[i].name[0] != 0 && i < 19){
-			if(stricmp(record[i].name, newdata.name) == 0){
+		while(strcmp(record[i].name,"") != 0 && i < 19){
+			if(strcmp(record[i].name, newdata.name) == 0){
 				if(newdata.step < record[i].step){
 					record[i] = newdata;
 					fclose(data);
