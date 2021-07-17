@@ -3,42 +3,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <conio.h>
-#include "Menu.h"
 
-void ScoreboardMenu(){
-	char* difficulty[] = { ">> Boring\n", ">> Walk In The Park\n", ">> Normal\n", ">> Nightmare\n", ">> Just Surrender Already\n", ">> Literally Unplayable\n", ">> Back\n" };
-	Menu scoreboard(7, difficulty);
-
-	while (true) {
-		system("cls");
-		printf("Select Difficulty:\n");
-		scoreboard.print();
-		int key = _getch();
-		if (key == 224) {
-			switch (_getch()) { // the real value
-			case 72: //up
-				scoreboard.up();
-				break;
-			case 80: //down
-				scoreboard.down();
-				break;
-			}
-		}
-		else if (key == 13) { //if enter key pressed
-			int difficulty = scoreboard.get();
-			switch(difficulty){
-			case 7:
-				return;
-			default:
-				ShowScoreboard(difficulty);
-				break;
-			}
-		}
-	}
-}
-
-void SortData(int difficulty){
-	Player record[20];
+void Scoreboard::sort(int difficulty){
+	Player record[20] = {};
 	Player temp;
 	FILE *data;
 	switch(difficulty){
@@ -66,11 +33,15 @@ void SortData(int difficulty){
 	}
 	fread(record, sizeof(Player), 20, data);
 	for(int i = 0; i < 19 ; i++){
+		if(record[i].name[0] == '\0')
+			continue;
 		for(int j = i;j < 20;j++){
-			if(record[i].step > record[j].step){
-				temp = record[i];
-				record[i] = record[j];
-				record[j] = temp;
+			if(record[j].name[0] == '\0')
+				continue;
+			if(record[i].step > record[j].step || (record[i].step == record[j].step && record[i].time > record[j].time)){
+					temp = record[i];
+					record[i] = record[j];
+					record[j] = temp;
 			}
 		}
 	}
@@ -99,7 +70,7 @@ void SortData(int difficulty){
 	fclose(data);
 }
 
-void ShowScoreboard(int difficulty){
+void Scoreboard::print(int difficulty){
 	system("cls");
 	Player record[20];
 	FILE *data;
@@ -125,29 +96,31 @@ void ShowScoreboard(int difficulty){
 	}
 	if (data == NULL) {
 		printf("No Record Found!!!\n");
-		system("pause");
+		printf("Press any key to continue!\n");
+		_getch();
 		return;
 	}
 	fread(record, sizeof(Player), 20, data);
-	printf("| %25s | %5s | %4s |\n", "Name", "Steps", "Time");
+	printf("\xC9\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCB\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCB\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBB\n");
+	printf("\xBA %-24s \xBA %-7s \xBA %-8s \xBA\n", "          Name", " Steps", "Time (s)");
+	printf("\xCC\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCE\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCE\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xB9\n");
 	for(int i = 0;i < 20;i++){
-		printf("| %25s |  %03d  | %04d |\n", record[i].name,record[i].step,record[i].time);
+		if(record[i].name[0] == '\0')
+			break;
+		printf("\xBA %-24s \xBA %-7d \xBA %-8d \xBA\n", record[i].name,record[i].step,record[i].time);
 	}
+	printf("\xC8\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCA\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCA\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBC\n");
 	fclose(data);
-	system("pause");
+	printf("Press any key to continue!\n");
+	_getch();
 }
 
-void SaveData(Game& prevgame){
+void Scoreboard::save(Game& prevgame){
 	Player newdata;
 	strcpy(newdata.name, prevgame.getUsername());
 	newdata.step = prevgame.getStep();
-	newdata.time = 0;
+	newdata.time = (int)difftime(prevgame.getFinishTime(),prevgame.getStartTime());
 	Player record[20] = {};
-	for(int i = 0;i<20;i++){
-		strcpy(record[i].name,"");
-		record[i].step = 0;
-		record[i].time = 0;
-	}
 	FILE *data = NULL;
 	switch(prevgame.getDifficulty()-2){
 		case 1:
@@ -172,9 +145,10 @@ void SaveData(Game& prevgame){
 	if(data != NULL){
 		fread(record, sizeof(Player), 20, data);
 		int i = 0;
-		while(strcmp(record[i].name,"") != 0 && i < 19){
-			if(strcmp(record[i].name, newdata.name) == 0){
-				if(newdata.step < record[i].step){
+		
+		while(record[i].name[0] != 0 && i < 19){
+			if(_stricmp(record[i].name, newdata.name) == 0){
+				if(newdata.step < record[i].step || (newdata.step == record[i].step && newdata.time < record[i].time)){
 					record[i] = newdata;
 					fclose(data);
 					switch (prevgame.getDifficulty() - 2) {

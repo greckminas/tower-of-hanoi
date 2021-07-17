@@ -23,6 +23,7 @@ public:
 	bool setDifficulty(int difficulty);
 	int getDifficulty();
 	void print();
+	void print_blank();
 	bool isFinished();
 	int getStep();
 	bool move(int from, int to);
