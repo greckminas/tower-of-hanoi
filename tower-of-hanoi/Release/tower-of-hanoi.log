@@ -1,4 +1,4 @@
-﻿Build started 18/07/2021 02:04:23.
+﻿Build started 19/07/2021 00:17:51.
      1>Project "D:\POLBAN\Smt 2\Struktur Data dan Algoritma\Praktek\Tubes\tower-of-hanoi\tower-of-hanoi\tower-of-hanoi.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Release\tower-of-hanoi.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -23,4 +23,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.25
+Time Elapsed 00:00:01.91

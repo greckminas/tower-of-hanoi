@@ -105,6 +105,7 @@ void PlayGame(char* username, int difficulty, bool is_blank = false){
 		}
 		else if (key == 27){ //if escape key pressed
 			if(surrenderPrompt()){
+				PlaySound("sound/losing_game.wav", NULL, SND_FILENAME | SND_ASYNC | SND_NODEFAULT);
 				isSurrender = true;
 				system("cls");
 				myGame.print();
@@ -115,9 +116,11 @@ void PlayGame(char* username, int difficulty, bool is_blank = false){
 		}
 	}
 	if(is_blank && !isSurrender){
+		PlaySound("sound/video_win.wav", NULL, SND_FILENAME | SND_ASYNC | SND_NODEFAULT);
 		system("cls");
 		myGame.print();
 	} else if (!isSurrender){
+		PlaySound("sound/video_win.wav", NULL, SND_FILENAME | SND_ASYNC | SND_NODEFAULT);
 		Scoreboard::save(myGame);
 		Scoreboard::sort(myGame.getDifficulty());
 	}
@@ -283,6 +286,7 @@ void PlayGame_ImAlive(char* username, int difficulty){
 		}
 		else if (key == 27){ //if escape key pressed
 			if(surrenderPrompt()){
+				PlaySound("sound/losing_game.wav", NULL, SND_FILENAME | SND_ASYNC | SND_NODEFAULT);
 				isSurrender = true;
 				system("cls");
 				myGame.print();
@@ -293,6 +297,7 @@ void PlayGame_ImAlive(char* username, int difficulty){
 		}
 	}
 	if (!isSurrender){
+		PlaySound("sound/video_win.wav", NULL, SND_FILENAME | SND_ASYNC | SND_NODEFAULT);
 		Scoreboard::save(myGame);
 		Scoreboard::sort(myGame.getDifficulty());
 	}

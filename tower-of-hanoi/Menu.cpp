@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#pragma comment(lib,"winmm.lib")
+
 Menu::Menu(int count, char** list){
 	max = 1;
 	n = count;
@@ -42,6 +44,7 @@ Menu::~Menu(){
 
 bool Menu::down(){
 	if(choose < n){
+		PlaySound("sound/picking_between_option.wav", NULL, SND_FILENAME | SND_ASYNC | SND_NODEFAULT);
 		choose++;
 		return true;
 	}
@@ -50,6 +53,7 @@ bool Menu::down(){
 
 bool Menu::up(){
 	if(choose > 1){
+		PlaySound("sound/picking_between_option.wav", NULL, SND_FILENAME | SND_ASYNC | SND_NODEFAULT);
 		choose--;
 		return true;
 	}
@@ -98,6 +102,7 @@ bool Menu::isSelected(int menu_number){
 }
 
 int Menu::get(){
+	PlaySound("sound/after_pick_an_option.wav", NULL, SND_FILENAME | SND_ASYNC | SND_NODEFAULT);
 	return choose;
 }
 
