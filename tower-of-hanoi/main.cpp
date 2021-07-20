@@ -313,7 +313,7 @@ void CreateGame(char* username, int* difficulty){
 	while(true){
 		
 		system("cls");
-		printf("Temple Trouble -> Play Game\n");
+		printf("Temple Trouble -> Play Game\n\n");
 		printf("Username = ");
 
 		//minimal 4 dan maksimal 12
@@ -476,11 +476,11 @@ void ScoreboardMenu(){
 }
 
 int GameModeMenu(){
-	char* mode_list[] = { ">> Competitive\n", ">> Ghost Mode\n", ">> Double the Trouble\n" };
+	char* mode_list[] = { ">> Competitive\n", ">> Ghost Mode\n", ">> Double Trouble\n" };
 	Menu modeMenu(3, mode_list);
 	while (true) {
 		system("cls");
-		printf("Select Mode : \n");
+		printf("Select Mode : \n\n");
 		modeMenu.print();
 		int key = _getch();
 		if (key == 224) {

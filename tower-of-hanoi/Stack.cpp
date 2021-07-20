@@ -12,6 +12,7 @@ bool Stack::push(int value){
 		return false;
 
 	newnode->value = value;
+	newnode->step = 0;
 	newnode->prev = top;
 	top = newnode;
 	return true;
