@@ -217,7 +217,17 @@ void PlayGame_ImAlive(char* username, int difficulty){
 					last_from = last_to;
 					last_to = last_from;
 					towerMenu.reset();
-					strcpy(message, "i don't want to move, actually let's go back!\n");
+					printf("i don't want to move\n");
+					Sleep(800);
+					printf(".");
+					Sleep(800);
+					printf(".");
+					Sleep(800);
+					printf(".");
+					Sleep(800);
+					printf("You know what\n");
+					Sleep(1600);
+					strcpy(message, "Let's just go back\n");
 				}
 				break;
 			case 3:
