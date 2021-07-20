@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
+#include <cwchar>
 #include "Menu.h"
 #include "Game.h"
 #include "scoreboard.h"
@@ -312,7 +313,7 @@ void CreateGame(char* username, int* difficulty){
 	while(true){
 		
 		system("cls");
-		printf("Tower of Hanoi -> Play Game\n");
+		printf("Temple Trouble -> Play Game\n");
 		printf("Username = ");
 
 		//minimal 4 dan maksimal 12
@@ -475,7 +476,7 @@ void ScoreboardMenu(){
 }
 
 int GameModeMenu(){
-	char* mode_list[] = { ">> Competitive\n", ">> Ghost Mode\n", ">> I AM ALIVE!!\n" };
+	char* mode_list[] = { ">> Competitive\n", ">> Ghost Mode\n", ">> Double the Trouble\n" };
 	Menu modeMenu(3, mode_list);
 	while (true) {
 		system("cls");
@@ -504,7 +505,7 @@ int main(){
 	
 	while (true) {
 		system("cls");
-		printf("Tower of Hanoi\n");
+		printf("Temple Trouble\n\n");
 		MainMenu.print();
 		int key = _getch();
 		if (key == 224) {
