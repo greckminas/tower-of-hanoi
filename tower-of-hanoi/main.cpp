@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
+#include <cwchar>
 #include "Menu.h"
 #include "Game.h"
 #include "scoreboard.h"
@@ -216,7 +217,17 @@ void PlayGame_ImAlive(char* username, int difficulty){
 					last_from = last_to;
 					last_to = last_from;
 					towerMenu.reset();
-					strcpy(message, "i don't want to move, actually let's go back!\n");
+					printf("i don't want to move\n");
+					Sleep(800);
+					printf(".");
+					Sleep(800);
+					printf(".");
+					Sleep(800);
+					printf(".");
+					Sleep(800);
+					printf("You know what\n");
+					Sleep(1600);
+					strcpy(message, "Let's just go back\n");
 				}
 				break;
 			case 3:
@@ -312,7 +323,7 @@ void CreateGame(char* username, int* difficulty){
 	while(true){
 		
 		system("cls");
-		printf("Tower of Hanoi -> Play Game\n");
+		printf("Temple Trouble -> Play Game\n\n");
 		printf("Username = ");
 
 		//minimal 4 dan maksimal 12
@@ -475,11 +486,11 @@ void ScoreboardMenu(){
 }
 
 int GameModeMenu(){
-	char* mode_list[] = { ">> Competitive\n", ">> Ghost Mode\n", ">> I AM ALIVE!!\n" };
+	char* mode_list[] = { ">> Competitive\n", ">> Ghost Mode\n", ">> Double Trouble\n" };
 	Menu modeMenu(3, mode_list);
 	while (true) {
 		system("cls");
-		printf("Select Mode : \n");
+		printf("Select Mode : \n\n");
 		modeMenu.print();
 		int key = _getch();
 		if (key == 224) {
@@ -504,7 +515,7 @@ int main(){
 	
 	while (true) {
 		system("cls");
-		printf("Tower of Hanoi\n");
+		printf("Temple Trouble\n\n");
 		MainMenu.print();
 		int key = _getch();
 		if (key == 224) {
