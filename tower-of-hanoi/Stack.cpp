@@ -3,44 +3,50 @@
 #include <stdlib.h>
 
 Stack::Stack(){
-	top = NULL;
+	top = -1;
 }
 
 bool Stack::push(int value){
-	node* newnode = (node*)malloc(sizeof(node));
-	if(newnode == NULL)
-		return false;
+	//stack is overflow
+	if(top == 8)
+		return false; 
 
-	newnode->value = value;
-	newnode->step = 0;
-	newnode->prev = top;
-	top = newnode;
+	//increase the top of stack
+	top++;
+
+	//set data of node
+	list_stack[top].step = 0;
+	list_stack[top].value = value;
+
 	return true;
 }
 
 bool Stack::push(int value, int step){
-	node* newnode = (node*)malloc(sizeof(node));
-	if(newnode == NULL)
-		return false;
+	//stack is overflow
+	if(top == 8)
+		return false; 
 
-	newnode->value = value;
-	newnode->step = step;
-	newnode->prev = top;
-	top = newnode;
+	//increase the top of stack
+	top++;
+
+	//set data of node
+	list_stack[top].step = step;
+	list_stack[top].value = value;
+
 	return true;
 }
 
 int Stack::pop(){
 	int result = -1;
 
-	if(top == NULL)
+	//stack is underflow
+	if(top == -1)
 		return result;
 
-	node* current = top;
-	result = current->value;
-	top = current->prev;
+	result = list_stack[top].value;
 
-	free(current);
+	//decrease the top of stack
+	top--;
 
 	return result;
 }
@@ -49,19 +55,15 @@ int Stack::peek(int n){
 	//0 = top
 	int result = -1;
 	
-	if(top == NULL)
+	//stack is empty
+	if(top == -1)
 		return result;
 
-	node* current = top;
-	for(int i = 0; i < n; i++){
-		if(current == NULL)
-			return result;
-		current = current->prev;
-	}
-	if(current == NULL)
+	//out of range
+	if(top < n)
 		return result;
 
-	result = current->value;
+	result = list_stack[top-n].value;
 	return result;
 }
 
@@ -69,40 +71,37 @@ int Stack::peek(int n, int* step){
 	//0 = top
 	int result = -1;
 	
-	if(top == NULL)
+	//stack is empty
+	if(top == -1)
 		return result;
 
-	node* current = top;
-	for(int i = 0; i < n; i++){
-		if(current == NULL)
-			return result;
-		current = current->prev;
-	}
-	if(current == NULL)
+	//out of range
+	if(top < n)
 		return result;
 
-	result = current->value;
-	*step = current->step;
+	result = list_stack[top-n].value;
+	*step = list_stack[top-n].step;
 	return result;
 }
 
 int Stack::count(){
 	int result = 0;
-	node* current = top;
+	
+	//stack is empty
+	if(top == -1)
+		return result;
 
-	while(current != NULL){
-		result++;
-		current = current->prev;
-	}
+	result = top+1;
 
 	return result;
 }
 
 void Stack::print(){
-	node* current = top;
+	//stack is empty
+	if(top == -1)
+		return;
 
-	while(current != NULL){
-		printf("%d \n", current->value);
-		current = current->prev;
+	for(int i = 0; i < top; i++){
+		printf("%d \n", list_stack[top].value);
 	}
 }
