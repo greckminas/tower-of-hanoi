@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 Stack::Stack(){
+	//define index of top as -1
 	top = -1;
 }
 

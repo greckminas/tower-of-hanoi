@@ -6,7 +6,9 @@
 #include "Game.h"
 #include "scoreboard.h"
 
-
+/* Function : surrenderPrompt -> bool
+ * Fungsi : menampilkan dialog dan menu menyerah
+ */
 bool surrenderPrompt(){
 	char* prompt_list[] = { "     Yes    ", "    No      "};
 	Menu surrenderMenu(2, prompt_list);
@@ -46,6 +48,9 @@ bool surrenderPrompt(){
 
 }
 
+/* Procedure : PlayGame
+ * Fungsi : memainkan game
+ */
 void PlayGame(char* username, int difficulty, bool is_blank = false){
 
 	Game myGame(username, difficulty);
@@ -129,6 +134,9 @@ void PlayGame(char* username, int difficulty, bool is_blank = false){
 	_getch();
 }
 
+/* Procedure : PlayGame_ImAlive
+ * Fungsi : memainkan game dengan mode Im Alive
+ */
 void PlayGame_ImAlive(char* username, int difficulty){
 
 	Game myGame(username, difficulty);
@@ -316,6 +324,9 @@ void PlayGame_ImAlive(char* username, int difficulty){
 	_getch();
 }
 
+/* Procedure : CreateGame
+ * Fungsi : membuat permainan (mengatur username, dan difficulty)
+ */
 void CreateGame(char* username, int* difficulty){
 	char* level_list[] = {"[] Boring (3)\n", "[] Walk in the park (4)\n", "[] Normal (5)\n", "[] Nightmare (6)\n", "[] Just Surrender Already (7)\n", "[] Literally Unplayable (8)\n"};
 	Menu difficultyMenu(6, level_list);
@@ -358,6 +369,9 @@ void CreateGame(char* username, int* difficulty){
 	return;
 }
 
+/* Procedure : HowToPlay
+ * Fungsi : menampilkan menu How To Play
+ */
 void HowToPlay() {
 
 	char* language[] = { ">> English\n", ">> Bahasa Indonesia\n", ">> Back to Main Menu\n" };
@@ -453,6 +467,9 @@ void HowToPlay() {
 	}
 }
 
+/* Procedure : ScoreboardMenu
+ * Fungsi : menampilkan menu Scoreboard
+ */
 void ScoreboardMenu(){
 	char* difficulty[] = { ">> Boring\n", ">> Walk In The Park\n", ">> Normal\n", ">> Nightmare\n", ">> Just Surrender Already\n", ">> Literally Unplayable\n", ">> Back to Main Menu\n" };
 	Menu scoreboardMenu(7, difficulty);
@@ -485,6 +502,9 @@ void ScoreboardMenu(){
 	}
 }
 
+/* Function : GameModeMenu -> int
+ * Fungsi : menampilkan menu game mode dan menentukannya
+ */
 int GameModeMenu(){
 	char* mode_list[] = { ">> Competitive\n", ">> Ghost Mode\n", ">> Double Trouble\n" };
 	Menu modeMenu(3, mode_list);
@@ -509,6 +529,9 @@ int GameModeMenu(){
 	}
 }
 
+/* Function : main -> int
+ * Fungsi : menjalankan keseluruhan program
+ */
 int main(){
 	char* menu_awal[] = { ">> Play Game\n", ">> How To Play\n", ">> Scoreboard\n", ">> Exit Game\n" };
 	Menu MainMenu(4, menu_awal);
