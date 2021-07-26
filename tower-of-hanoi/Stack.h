@@ -4,11 +4,11 @@
 struct node {
 	int value;
 	int step;
-	node* prev;
 };
 
 class Stack {
-	node* top;
+	int top;
+	node list_stack[8];
 	
 public:
 	Stack();
