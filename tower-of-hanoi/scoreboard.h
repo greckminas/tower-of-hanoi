@@ -10,8 +10,13 @@ class Scoreboard {
 	} Player;
 
 public:
+	/* PRINT SCOREBOARD */
 	static void print(int difficulty);
+
+	/* SORT SCOREBOARD */
 	static void sort(int difficulty);
+
+	/* APPEND SCOREBOARD */
 	static void save(Game& data);
 };
 
