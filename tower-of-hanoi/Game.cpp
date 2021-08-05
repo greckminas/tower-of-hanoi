@@ -83,9 +83,9 @@ void Game::print(){
 	printf("\xBB\n"); // \ 
 
 	//print status game (username, difficulty, step)
-	printf("%c %-9s : %*s %c\n", '\xBA', "Username", 5-getDifficulty()*6, getUsername(), '\xBA');
-	printf("%c %-9s : %*d %c\n", '\xBA', "Diff.", 5-getDifficulty()*6, getDifficulty(), '\xBA');
-	printf("%c %-9s : %*d %c\n", '\xBA', "Step", 5-getDifficulty()*6, getStep(), '\xBA');
+	printf("%c %-10s: %*s %c\n", '\xBA', "Username", 5-getDifficulty()*6, getUsername(), '\xBA');
+	printf("%c %-10s: %1d %*s %c\n", '\xBA', "Difficulty", getDifficulty(), 7-getDifficulty()*6, "Piring", '\xBA');
+	printf("%c %-10s: %*d %c\n", '\xBA', "Step", 5-getDifficulty()*6, getStep(), '\xBA');
 
 	//print border
 	printf("\xCC"); // /
@@ -140,9 +140,9 @@ void Game::print_blank(){
 	printf("\xBB\n"); // \ 
 
 	//print status game (username, difficulty, step)
-	printf("%c %-9s : %*s %c\n", '\xBA', "Username", 5-getDifficulty()*6, getUsername(), '\xBA');
-	printf("%c %-9s : %*d %c\n", '\xBA', "Diff.", 5-getDifficulty()*6, getDifficulty(), '\xBA');
-	printf("%c %-9s : %*d %c\n", '\xBA', "Step", 5-getDifficulty()*6, getStep(), '\xBA');
+	printf("%c %-10s: %*s %c\n", '\xBA', "Username", 5-getDifficulty()*6, getUsername(), '\xBA');
+	printf("%c %-10s: %1d %*s %c\n", '\xBA', "Difficulty", getDifficulty(), 7-getDifficulty()*6, "Piring", '\xBA');
+	printf("%c %-10s: %*d %c\n", '\xBA', "Step", 5-getDifficulty()*6, getStep(), '\xBA');
 
 	//print border
 	printf("\xCC"); // /
